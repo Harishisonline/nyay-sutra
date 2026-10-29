@@ -1,5 +1,7 @@
 # NYAY-SUTRA
 
+[![CI](https://github.com/Harishisonline/nyay-sutra/actions/workflows/ci.yml/badge.svg)](https://github.com/Harishisonline/nyay-sutra/actions/workflows/ci.yml)
+
 Know your rights, in your language.
 
 NYAY-SUTRA is a legal-rights assistant for people in Maharashtra. Ask a question in English, Hindi, Hinglish, or Marathi. The app matches it against a small corpus of Indian statutes, then answers with practical next steps and a link to the official text on [India Code](https://www.indiacode.nic.in/). You can turn that answer into a complaint draft, edit it, and download it.

@@ -1,5 +1,5 @@
 {
-  "embedder": "local (/Users/harish/Downloads/nyay-sutra/apps/api/data/models/multilingual-e5-base)",
+  "embedder": "local (multilingual-e5-base, 768 dims)",
   "embedding_dim": 768,
   "corpus_chunks": 48,
   "acts": 12,
@@ -15,9 +15,10 @@
   "off_topic_refused_rate": 1.0,
   "confidence_floor": 0.3,
   "max_calibrated_off_topic": 0.0,
-  "index_chunks_per_sec": 43.57,
-  "query_embed_ms_p50": 15.2,
-  "query_embed_ms_max": 17.7,
-  "search_ms_per_query": 4.04,
-  "misses": 7
+  "index_chunks_per_sec": 47.59,
+  "query_embed_ms_p50": 13.3,
+  "query_embed_ms_max": 14.1,
+  "search_ms_per_query": 3.47,
+  "misses": 7,
+  "note": "Baseline path only. The production path is Qdrant server-side inference; see server_side_benchmark.json."
 }

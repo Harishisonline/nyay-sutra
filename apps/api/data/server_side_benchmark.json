@@ -1,0 +1,65 @@
+{
+  "embedder": "qdrant-inference (intfloat/multilingual-e5-small)",
+  "in_domain_queries": 35,
+  "off_topic_queries": 12,
+  "recall_at_1": 0.7714,
+  "recall_at_3": 0.9143,
+  "recall_at_5": 0.9714,
+  "mrr": 0.8508,
+  "recall_at_10_in_context": 1.0,
+  "search_ms_p50": 669.8,
+  "search_ms_max": 1023.7,
+  "off_topic_refused_rate": 1.0,
+  "max_raw_off_topic": 0.7927,
+  "context_chunks": 10,
+  "misses": [
+    {
+      "query": "what notice period must my landlord give before taking back the flat",
+      "act": "mh-rent-control-1999",
+      "section": "16",
+      "rank": 9
+    },
+    {
+      "query": "I bought a defective phone and the shop refuses to refund me",
+      "act": "cpa-2019",
+      "section": "2(11)",
+      "rank": 4
+    },
+    {
+      "query": "which court do I go to for a small consumer claim",
+      "act": "cpa-2019",
+      "section": "34",
+      "rank": 2
+    },
+    {
+      "query": "my husband beats me what law can protect me",
+      "act": "pwdva-2005",
+      "section": "3",
+      "rank": 3
+    },
+    {
+      "query": "what counts as dowry under the law",
+      "act": "dowry-prohibition-1961",
+      "section": "2",
+      "rank": 2
+    },
+    {
+      "query": "my child is denied admission because of caste what are my rights",
+      "act": "rte-2009",
+      "section": "12",
+      "rank": 4
+    },
+    {
+      "query": "my husband and his family are torturing me for dowry",
+      "act": "ipc-1860",
+      "section": "498A",
+      "rank": 3
+    },
+    {
+      "query": "someone cheated me of my money",
+      "act": "ipc-1860",
+      "section": "420",
+      "rank": 2
+    }
+  ]
+}

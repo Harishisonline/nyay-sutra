@@ -164,5 +164,5 @@ def get_inference_client() -> QdrantInferenceClient:
         url=s.qdrant_url,
         api_key=s.qdrant_api_key,
         model=s.qdrant_inference_model,
-        collection=s.qdrant_collection,
+        collection=s.resolved_qdrant_collection,
     )

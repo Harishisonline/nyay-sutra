@@ -219,7 +219,8 @@ Verified 30 Oct 2026, against the live deployment.
 | API health | Green: Supabase Postgres, Qdrant Cloud 48 chunks, `qdrant-inference (intfloat/multilingual-e5-small)`, Groq `openai/gpt-oss-120b` |
 | Live query | Marathi tenancy question answered in 2.0 s, cited Maharashtra Rent Control Act sections 15 and 29 with working India Code links |
 | Off-topic refusal | 12 of 12 out-of-scope questions refused |
-| Retrieval on the server-side path | recall@5 1.000, MRR 0.750 across 28 in-domain questions |
+| Retrieval, Qdrant server-side path (production) | recall@1 0.771, recall@3 0.914, recall@5 0.971, MRR 0.851 over 35 in-domain questions |
+| Retrieval, local e5-base path (baseline) | recall@1 0.800, recall@3 0.943, recall@5 1.000, MRR 0.871 over the same 35 questions |
 | End to end in a browser | Sign in, ask in Marathi, create a draft, AI-improve it, download it, all on the deployed URLs |
 
 **Live deployment**
@@ -230,9 +231,11 @@ Verified 30 Oct 2026, against the live deployment.
 | API | https://nyay-sutra-api.vercel.app |
 | Repository | https://github.com/Harishisonline/nyay-sutra |
 
-**Calibration is model specific.** `intfloat/multilingual-e5-small` packs its in-domain and off-topic score ranges closer together than e5-base does: off-topic questions peak at 0.7927 and the weakest in-domain question sits at 0.8010, so the usable raw window is only `(0.7927, 0.8010]`. `QdrantInferenceE5` therefore carries its own constants (`floor = 0.733`, `ceil = 0.946`), which put the refusal boundary at 0.7969, inside that window. Reusing the e5-base constants there silently dropped 2 of 35 legitimate legal questions and saturated 11 of 35 confidence scores at 1.0. Re-check this with `python apps/api/scripts/verify_qdrant_calibration.py` whenever the embedding model or the corpus changes.
+**The production path is the weaker one, on purpose.** `intfloat/multilingual-e5-small` scores lower and ranks slightly worse than the local `multilingual-e5-base`: one question puts its gold section at rank 9 instead of rank 4. That is the trade for dropping 1.1 GB of model weights from the function bundle. `context_chunks` is 10 rather than 6 so the gold section still reaches the prompt, which takes recall inside the prompt to 35 of 35.
 
-**What is not done, and what each one costs you.** Gemini and Bhashini keys are missing, so a Groq rate limit surfaces as an error instead of a fallback, and Marathi and Hindi voice stay off. English voice works through Whisper. Supabase phone OTP is disabled on the project, so the deployment runs the local OTP backend: the code is generated server-side and shown on screen instead of being sent by SMS. Enabling SMS needs a provider account and Indian DLT registration, which is a separate piece of work. The DistilBERT reranker notebook is in `apps/api/ml/train_distilbert.ipynb` but the Colab training run has not happened, so ranking is embedding-similarity only. The 48 section summaries in the seed corpus are a study corpus and have not been through a legal review.
+**Calibration is model specific.** `intfloat/multilingual-e5-small` packs its in-domain and off-topic score ranges closer together than e5-base does: off-topic questions peak at 0.7927 and the weakest in-domain question sits at 0.8010, so the usable raw window is only `(0.7927, 0.8010]`. `QdrantInferenceE5` therefore carries its own constants (`floor = 0.733`, `ceil = 0.946`), which put the refusal boundary at 0.7969, inside that window. Reusing the e5-base constants there silently dropped 2 of 35 legitimate legal questions and saturated 11 of 35 confidence scores at 1.0. Re-check both paths with `python apps/api/scripts/verify_qdrant_calibration.py` and `python apps/api/scripts/eval_server_side.py` whenever the embedding model or the corpus changes.
+
+**What is not done, and what each one costs you.** Gemini and Bhashini keys are missing, so a Groq rate limit surfaces as an error instead of a fallback, and Marathi and Hindi voice stay off. English voice works through Whisper. Supabase phone OTP is disabled on the project, so the deployment runs the local OTP backend: the code is generated server-side and shown on screen instead of being sent by SMS. Enabling SMS needs a paid Twilio account, since the international gateway that skips Indian DLT registration is still a paid route; the free trial is restricted to the sign-up country and to a handful of verified recipients. The DistilBERT reranker notebook is in `apps/api/ml/train_distilbert.ipynb` but the Colab training run has not happened, so ranking is embedding-similarity only. The 48 section summaries in the seed corpus are a study corpus and have not been through a legal review.
 
 ## Disclaimer
 

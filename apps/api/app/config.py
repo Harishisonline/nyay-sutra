@@ -57,7 +57,13 @@ class Settings(BaseSettings):
     qdrant_url: str | None = None
     qdrant_api_key: str | None = None
     qdrant_path: str = str(DATA_DIR / "qdrant")
-    qdrant_collection: str = "corpus_chunks"
+    # Empty means "choose from the embeddings backend". The local embedding path indexes
+    # into "corpus_chunks" at 768 dims. The Qdrant server-side path embeds with
+    # intfloat/multilingual-e5-small at 384 dims and needs its own collection, so
+    # querying the 768-dim collection with 384-dim vectors fails with a Qdrant
+    # dimension error. Resolved in resolved_qdrant_collection, because a field default
+    # cannot read another field's value at class definition time.
+    qdrant_collection: str = ""
     reranker_path: str | None = None
 
     # RAG thresholds (PRD 7 + CURSOR_PROMPT 2)
@@ -65,7 +71,12 @@ class Settings(BaseSettings):
     confidence_threshold: float = 0.6
     min_valid_citations: int = 2
     retrieval_top_k: int = 12
-    context_chunks: int = 6
+    # How many retrieved sections go into the prompt. Measured over the 35 in-domain
+    # questions on the Qdrant server-side path, the gold section lands inside the
+    # first 10 for all 35 and inside the first 6 for only 34, because one query puts
+    # its gold at rank 9. Going to 10 recovers it and lets the model cite the right
+    # section; the prompt grows by about 1.8k characters.
+    context_chunks: int = 10
 
     # Voice
     bhashini_api_key: str | None = None
@@ -92,6 +103,15 @@ class Settings(BaseSettings):
     @property
     def cors_origin_list(self) -> list[str]:
         return [o.strip() for o in self.cors_origins.split(",") if o.strip()]
+
+    @property
+    def resolved_qdrant_collection(self) -> str:
+        """The collection to search, matching the dimensionality of the embedder."""
+        if self.qdrant_collection:
+            return self.qdrant_collection
+        if self.embeddings_backend == "qdrant":
+            return "corpus_chunks_q"
+        return "corpus_chunks"
 
     @property
     def offline_llm_enabled(self) -> bool:

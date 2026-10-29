@@ -40,7 +40,7 @@ def point_id(key: str) -> str:
 class VectorStore:
     def __init__(self) -> None:
         s = get_settings()
-        self.collection = s.qdrant_collection
+        self.collection = s.resolved_qdrant_collection
         self._local_path = s.qdrant_path
         self._prefer_cloud = bool(s.qdrant_url)
         self.degraded = False

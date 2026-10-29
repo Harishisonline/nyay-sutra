@@ -26,6 +26,10 @@ class Settings(BaseSettings):
 
     # Auth
     auth_backend: Literal["auto", "local", "supabase"] = "auto"
+    # Lets the local OTP backend run under APP_ENV=production. The code is generated
+    # server-side and returned to the client as `dev_code` instead of being sent by SMS.
+    # Only for demo deployments where no SMS provider is configured.
+    allow_local_otp_in_production: bool = False
     jwt_secret: str = _DEV_JWT_SECRET
     jwt_ttl_seconds: int = 60 * 60 * 24
     supabase_url: str | None = None
@@ -44,8 +48,11 @@ class Settings(BaseSettings):
     allow_offline_llm: bool = True
 
     # Embeddings + vector store
-    embeddings_backend: Literal["auto", "local", "hf_api", "hash"] = "auto"
+    embeddings_backend: Literal["auto", "local", "hf_api", "hash", "qdrant"] = "auto"
     embeddings_model: str = "intfloat/multilingual-e5-base"
+    # Model Qdrant Cloud runs server-side when EMBEDDINGS_BACKEND=qdrant. It must be one
+    # of the models the cluster's inference service accepts.
+    qdrant_inference_model: str = "intfloat/multilingual-e5-small"
     huggingface_api_key: str | None = None
     qdrant_url: str | None = None
     qdrant_api_key: str | None = None
@@ -96,8 +103,11 @@ class Settings(BaseSettings):
         problems: list[str] = []
         if self.jwt_secret == _DEV_JWT_SECRET and self.resolved_auth_backend == "local":
             problems.append("JWT_SECRET must be set in production")
-        if self.resolved_auth_backend == "local":
-            problems.append("Production requires Supabase phone auth (SUPABASE_URL + SUPABASE_ANON_KEY)")
+        if self.resolved_auth_backend == "local" and not self.allow_local_otp_in_production:
+            problems.append(
+                "Production requires Supabase phone auth (SUPABASE_URL + SUPABASE_ANON_KEY). "
+                "Set ALLOW_LOCAL_OTP_IN_PRODUCTION=true to run the local OTP backend instead."
+            )
         if not (self.groq_api_key or self.gemini_api_key):
             problems.append("Production requires GROQ_API_KEY or GEMINI_API_KEY")
         if problems:

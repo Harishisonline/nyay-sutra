@@ -78,3 +78,5 @@ apps/api/data/models/
 
 # Design mockups (local reference, not the running app)
 uimock/
+.vercel
+.env*

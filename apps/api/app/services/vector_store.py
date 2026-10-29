@@ -115,6 +115,32 @@ class VectorStore:
     async def search(self, vector: list[float], top_k: int, categories: list[str] | None = None) -> list[Hit]:
         return await asyncio.to_thread(self._search, vector, top_k, categories)
 
+    async def search_text(self, text: str, top_k: int, categories: list[str] | None = None) -> list[Hit]:
+        """Search by raw text, letting Qdrant embed it server-side.
+
+        Used when EMBEDDINGS_BACKEND=qdrant, where this process holds no embedding model.
+        """
+        from app.services.qdrant_inference import get_inference_client
+
+        client = get_inference_client()
+        raw = await client.search(f"query: {text}", top_k, categories)
+        return [Hit(h.key, h.act_id, h.section, h.cosine, h.payload) for h in raw]
+
+    async def upsert_text(self, items: list[tuple[str, str, dict[str, Any]]]) -> None:
+        """Upsert passages as text so Qdrant embeds them server-side."""
+        from app.services.qdrant_inference import get_inference_client
+
+        client = get_inference_client()
+        points = [
+            {
+                "id": point_id(key),
+                "vector": {"text": text, "model": client.model},
+                "payload": {**payload, "key": key},
+            }
+            for key, text, payload in items
+        ]
+        await client.upsert(points)
+
     def _count(self) -> int:
         return self._with_fallback(self._count_once)
 

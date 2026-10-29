@@ -19,7 +19,7 @@ import structlog
 from app.config import get_settings
 from app.services import llm
 from app.services.corpus import Act, Section, get_corpus, normalise_section
-from app.services.embeddings import get_embedder
+from app.services.embeddings import QdrantInferenceE5, get_embedder
 from app.services.reranker import rerank
 from app.services.vector_store import get_vector_store
 
@@ -105,8 +105,13 @@ async def retrieve(question: str, ctx: ChatContext) -> tuple[list[Chunk], str]:
     s = get_settings()
     corpus = get_corpus()
     embedder = get_embedder()
-    [vector] = await asyncio.to_thread(embedder.embed_queries, [question])
-    hits = await get_vector_store().search(vector, s.retrieval_top_k)
+    store = get_vector_store()
+    if isinstance(embedder, QdrantInferenceE5):
+        # Qdrant embeds the query itself, so the text goes to the cluster rather than a vector.
+        hits = await store.search_text(question, s.retrieval_top_k)
+    else:
+        [vector] = await asyncio.to_thread(embedder.embed_queries, [question])
+        hits = await store.search(vector, s.retrieval_top_k)
     if ctx.state and ctx.state != "Maharashtra":
         hits = [h for h in hits if corpus.acts.get(h.act_id) and corpus.acts[h.act_id].jurisdiction == "central"]
     hits, reranker_name = await rerank(question, hits)

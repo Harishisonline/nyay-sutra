@@ -15,9 +15,9 @@
   "off_topic_refused_rate": 1.0,
   "confidence_floor": 0.3,
   "max_calibrated_off_topic": 0.0,
-  "index_chunks_per_sec": 8.77,
-  "query_embed_ms_p50": 14.5,
-  "query_embed_ms_max": 44.6,
-  "search_ms_per_query": 3.63,
+  "index_chunks_per_sec": 43.57,
+  "query_embed_ms_p50": 15.2,
+  "query_embed_ms_max": 17.7,
+  "search_ms_per_query": 4.04,
   "misses": 7
 }

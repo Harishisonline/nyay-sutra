@@ -21,6 +21,7 @@ import httpx
 import numpy as np
 
 from app.config import get_settings
+from app.services.qdrant_inference import E5_SMALL_DIM
 
 DIM = 768
 
@@ -53,6 +54,33 @@ class _E5Calibration:
 
     def calibrate(self, cosine: float) -> float:
         return float(min(1.0, max(0.0, (cosine - self.floor) / (self.ceil - self.floor))))
+
+class QdrantInferenceE5(_E5Calibration):
+    """Embeddings computed by Qdrant Cloud, not by this process.
+
+    This backend does not produce vectors. It marks the retrieval path so the query and
+    the corpus are both handed to Qdrant as text and the cluster embeds them server-side.
+    The dimension matches intfloat/multilingual-e5-small.
+    """
+
+    name = "qdrant-inference"
+
+    def __init__(self, model: str) -> None:
+        self.name = f"qdrant-inference ({model})"
+        self.model = model
+        self.dim = E5_SMALL_DIM
+
+    def embed_queries(self, texts: list[str]) -> list[list[float]]:
+        raise RuntimeError("Qdrant server-side inference embeds inside Qdrant, not in this process")
+
+    def embed_passages(self, texts: list[str]) -> list[list[float]]:
+        raise RuntimeError("Qdrant server-side inference embeds inside Qdrant, not in this process")
+
+    def calibrate(self, cosine: float) -> float:
+        return float(min(1.0, max(0.0, (cosine - self.floor) / (self.ceil - self.floor))))
+
+    def describe(self) -> str:
+        return self.name
 
 
 class LocalE5(_E5Calibration):
@@ -148,6 +176,8 @@ def get_embedder() -> Embedder:
     backend = s.embeddings_backend
     if backend == "hash":
         return HashEmbedder()
+    if backend == "qdrant":
+        return QdrantInferenceE5(s.qdrant_inference_model)
     if backend == "hf_api" or (backend == "auto" and s.huggingface_api_key and not _local_available()):
         if not s.huggingface_api_key:
             raise RuntimeError("EMBEDDINGS_BACKEND=hf_api needs HUGGINGFACE_API_KEY")

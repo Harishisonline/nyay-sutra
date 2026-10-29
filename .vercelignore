@@ -1,0 +1,13 @@
+apps/api/
+docs/
+assets/
+uimock/
+prd/
+*.md
+!README.md
+**/node_modules
+.pnpm-store
+apps/web/.next
+**/.venv
+**/__pycache__
+**/.env

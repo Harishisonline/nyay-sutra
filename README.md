@@ -110,9 +110,7 @@ nyay-sutra/
 ├── apps/web/          Next.js app
 ├── apps/api/          FastAPI app, seed corpus, migrations, ML notebook
 ├── packages/shared/   Types shared with the web app
-├── prd/               Product requirements, pitch content, account notes
-├── uimock/            HTML mockups the UI was built from
-├── CHANGELOG.md
+├── .github/workflows/ CI: typecheck, lint, build, ruff, mypy, pytest
 └── LICENSE
 ```
 
@@ -154,11 +152,38 @@ Stop the API first if it is using the embedded Qdrant folder. A cloud `QDRANT_UR
 
 ## Deploying
 
-Full runbook in **[`DEPLOY.md`](./DEPLOY.md)**. The short version:
+Both deploys are free tier and neither needs a card. The frontend needs the backend URL, so the backend goes first.
 
-1. Set `APP_ENV=production`, `AUTH_BACKEND=supabase`, `JWT_SECRET` and `SUPABASE_SERVICE_KEY` in `apps/api/.env`. Until then the API refuses to boot in production mode.
-2. Create a HuggingFace Space with the Docker SDK. `apps/api/Dockerfile`, `apps/api/.dockerignore` and `apps/api/README.yaml` are ready.
-3. Import the repo into Vercel. Set `API_URL` to the Spaces URL, no trailing slash.
+**1. Backend to HuggingFace Spaces.** A `Dockerfile`, `.dockerignore` and `README.yaml` are in `apps/api/`. Create a Space with the Docker SDK, copy `apps/api/` into it, and set these as Space variables:
+
+| Variable | Secret | Value |
+|---|---|---|
+| `APP_ENV` | no | `production` |
+| `JWT_SECRET` | yes | `python3 -c "import secrets; print(secrets.token_urlsafe(48))"` |
+| `GROQ_API_KEY` | yes | from `apps/api/.env` |
+| `GEMINI_API_KEY` | yes | if you have one |
+| `HUGGINGFACE_API_KEY` | yes | from `apps/api/.env` |
+| `QDRANT_URL` | no | from `apps/api/.env` |
+| `QDRANT_API_KEY` | yes | from `apps/api/.env` |
+| `SUPABASE_URL` | no | from `apps/api/.env` |
+| `SUPABASE_ANON_KEY` | yes | from `apps/api/.env` |
+| `SUPABASE_SERVICE_KEY` | yes | from the Supabase dashboard, Settings then API. **Server side only.** |
+| `DATABASE_URL` | yes | from `apps/api/.env` |
+| `BHASHINI_API_KEY` | yes | if you have one |
+| `BHASHINI_USER_ID` | yes | if you have one |
+
+The image installs CPU-only torch and bakes the embedding model in, so the first build takes 10 to 15 minutes. Verify with `curl https://<space-url>/api/v1/health`. Every check must be green and `auth` must read `supabase`.
+
+**2. Frontend to Vercel.** Import the repo, framework auto-detects as Next.js. Set:
+
+| Variable | Value |
+|---|---|
+| `API_URL` | the Spaces URL, **no trailing slash** |
+| `NEXT_PUBLIC_SITE_URL` | the Vercel URL |
+| `NEXT_PUBLIC_REPO_URL` | this repository |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | your team inbox |
+
+`API_URL` is the one that matters. It is read server side in `apps/web/lib/session.ts`.
 
 The frontend calls the API server-side only. The browser never touches Groq, Qdrant or Supabase directly.
 
@@ -168,12 +193,12 @@ Verified 30 Oct 2026.
 
 | Check | Result |
 |---|---|
-| `pnpm typecheck`, `pnpm lint`, `pnpm build` | Pass, 21 routes |
+| `pnpm typecheck`, `pnpm lint`, `pnpm build` | Pass, 24 routes |
 | `ruff`, `mypy`, `pytest` | Pass, 25 tests |
 | API health | Green: Supabase Postgres, Qdrant Cloud 48 chunks, local e5, Groq `openai/gpt-oss-120b` |
 | Live query | Cited answer with 2 working India Code links in 2.8 s |
 
-Not done, and what each one costs you, is in [`hermestodo.md`](./hermestodo.md). The short version: Gemini and Bhashini keys are missing, so a Groq rate limit surfaces as an error instead of a fallback, and Marathi and Hindi voice stay off. The DistilBERT reranker notebook exists but the Colab training run has not happened, so ranking is embedding-similarity only.
+**What is not done, and what each one costs you.** Gemini and Bhashini keys are missing, so a Groq rate limit surfaces as an error instead of a fallback, and Marathi and Hindi voice stay off. English voice works through Whisper. The DistilBERT reranker notebook is in `apps/api/ml/train_distilbert.ipynb` but the Colab training run has not happened, so ranking is embedding-similarity only. The 48 section summaries in the seed corpus are a study corpus and have not been through a legal review.
 
 ## Disclaimer
 

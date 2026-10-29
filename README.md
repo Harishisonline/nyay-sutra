@@ -156,31 +156,48 @@ Stop the API first if it is using the embedded Qdrant folder. A cloud `QDRANT_UR
 
 Both deploys are free tier and neither needs a card. The frontend needs the backend URL, so the backend goes first.
 
-**1. Backend to HuggingFace Spaces.** A `Dockerfile`, `.dockerignore` and `README.yaml` are in `apps/api/`. Create a Space with the Docker SDK, copy `apps/api/` into it, and set these as Space variables:
+**1. Backend to Vercel as a Python function.** The API is a FastAPI app; Vercel builds `apps/api/api/index.py` as a serverless function and routes every path to it.
+
+Set the project to framework `fastapi`, then set these as production environment variables:
 
 | Variable | Secret | Value |
 |---|---|---|
 | `APP_ENV` | no | `production` |
 | `JWT_SECRET` | yes | `python3 -c "import secrets; print(secrets.token_urlsafe(48))"` |
+| `AUTH_BACKEND` | no | `supabase` if phone OTP is on, `local` if not |
+| `ALLOW_LOCAL_OTP_IN_PRODUCTION` | no | `true` only when `AUTH_BACKEND=local` |
 | `GROQ_API_KEY` | yes | from `apps/api/.env` |
+| `GROQ_MODEL` | no | `openai/gpt-oss-120b` |
 | `GEMINI_API_KEY` | yes | if you have one |
-| `HUGGINGFACE_API_KEY` | yes | from `apps/api/.env` |
+| `EMBEDDINGS_BACKEND` | no | `qdrant` |
+| `QDRANT_INFERENCE_MODEL` | no | `intfloat/multilingual-e5-small` |
 | `QDRANT_URL` | no | from `apps/api/.env` |
 | `QDRANT_API_KEY` | yes | from `apps/api/.env` |
+| `QDRANT_COLLECTION` | no | the collection you indexed, for example `corpus_chunks_q` |
 | `SUPABASE_URL` | no | from `apps/api/.env` |
 | `SUPABASE_ANON_KEY` | yes | from `apps/api/.env` |
 | `SUPABASE_SERVICE_KEY` | yes | from the Supabase dashboard, Settings then API. **Server side only.** |
 | `DATABASE_URL` | yes | from `apps/api/.env` |
+| `CORS_ORIGINS` | no | your frontend origin, comma separated |
 | `BHASHINI_API_KEY` | yes | if you have one |
 | `BHASHINI_USER_ID` | yes | if you have one |
 
-The image installs CPU-only torch and bakes the embedding model in, so the first build takes 10 to 15 minutes. Verify with `curl https://<space-url>/api/v1/health`. Every check must be green and `auth` must read `supabase`.
+**Why the backend is small enough to deploy.** A Vercel function must stay under 225 MB. The local `multilingual-e5-base` model is 1.1 GB, so it cannot ship inside a function. With `EMBEDDINGS_BACKEND=qdrant` the embedding is computed by Qdrant Cloud's own inference service over a REST call, so no model weights and no ML runtime are in the bundle at all. `apps/api/requirements.txt` has no torch, no transformers and no onnxruntime.
 
-**2. Frontend to Vercel.** Import the repo, framework auto-detects as Next.js. Set:
+Index the corpus into a 384-dim collection with Qdrant server-side inference before the first deploy:
+
+```
+EMBEDDINGS_BACKEND=qdrant QDRANT_COLLECTION=corpus_chunks_q \
+  python apps/api/scripts/ingest_corpus.py
+```
+
+Verify with `curl https://<api-url>/api/v1/health`. Every check must be green and `embeddings` must read `qdrant-inference`.
+
+**2. Frontend to Vercel.** Set the project root directory to `apps/web` and framework to `nextjs`. Set:
 
 | Variable | Value |
 |---|---|
-| `API_URL` | the Spaces URL, **no trailing slash** |
+| `API_URL` | the API URL, **no trailing slash** |
 | `NEXT_PUBLIC_SITE_URL` | the Vercel URL |
 | `NEXT_PUBLIC_REPO_URL` | this repository |
 | `NEXT_PUBLIC_CONTACT_EMAIL` | your team inbox |
@@ -189,18 +206,23 @@ The image installs CPU-only torch and bakes the embedding model in, so the first
 
 The frontend calls the API server-side only. The browser never touches Groq, Qdrant or Supabase directly.
 
+**Alternative: HuggingFace Spaces.** `apps/api/` also carries a `Dockerfile`, `.dockerignore` and `README.yaml` for a Docker SDK Space, which runs the CPU-only local embedding model. Use it if you would rather have a long-running container than a serverless function.
+
 ## Status
 
-Verified 30 Oct 2026.
+Verified 30 Oct 2026, against the live deployment.
 
 | Check | Result |
 |---|---|
 | `pnpm typecheck`, `pnpm lint`, `pnpm build` | Pass, 24 routes |
 | `ruff`, `mypy`, `pytest` | Pass, 25 tests |
-| API health | Green: Supabase Postgres, Qdrant Cloud 48 chunks, local e5, Groq `openai/gpt-oss-120b` |
-| Live query | Cited answer with 2 working India Code links in 2.8 s |
+| API health | Green: Supabase Postgres, Qdrant Cloud 48 chunks, `qdrant-inference (intfloat/multilingual-e5-small)`, Groq `openai/gpt-oss-120b` |
+| Live query | Marathi tenancy question answered in 2.0 s, cited Maharashtra Rent Control Act sections 15 and 29 with working India Code links |
+| Off-topic refusal | 12 of 12 out-of-scope questions refused |
+| Retrieval on the server-side path | recall@5 1.000, MRR 0.750 across 28 in-domain questions |
+| End to end in a browser | Sign in, ask in Marathi, create a draft, AI-improve it, download it, all on the deployed URLs |
 
-**What is not done, and what each one costs you.** Gemini and Bhashini keys are missing, so a Groq rate limit surfaces as an error instead of a fallback, and Marathi and Hindi voice stay off. English voice works through Whisper. The DistilBERT reranker notebook is in `apps/api/ml/train_distilbert.ipynb` but the Colab training run has not happened, so ranking is embedding-similarity only. The 48 section summaries in the seed corpus are a study corpus and have not been through a legal review.
+**What is not done, and what each one costs you.** Gemini and Bhashini keys are missing, so a Groq rate limit surfaces as an error instead of a fallback, and Marathi and Hindi voice stay off. English voice works through Whisper. Supabase phone OTP is disabled on the project, so the deployment runs the local OTP backend: the code is generated server-side and shown on screen instead of being sent by SMS. Enabling SMS needs a provider account and Indian DLT registration, which is a separate piece of work. The DistilBERT reranker notebook is in `apps/api/ml/train_distilbert.ipynb` but the Colab training run has not happened, so ranking is embedding-similarity only. The 48 section summaries in the seed corpus are a study corpus and have not been through a legal review.
 
 ## Disclaimer
 

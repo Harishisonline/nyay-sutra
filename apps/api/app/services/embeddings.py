@@ -65,6 +65,17 @@ class QdrantInferenceE5(_E5Calibration):
 
     name = "qdrant-inference"
 
+    # intfloat/multilingual-e5-small scores lower and packs its in-domain and off-topic
+    # ranges closer together than e5-base does, so it needs its own calibration.
+    # Measured over the 35 in-domain and 12 off-topic questions in
+    # scripts/eval_retrieval.py, driving the real server-side search path:
+    # off-topic peaks at 0.7927, the weakest in-domain question sits at 0.8010, so the
+    # usable raw window is (0.7927, 0.8010]. These constants put the refusal boundary
+    # at 0.7969, inside that window, which yields 35/35 in-domain answered and 12/12
+    # off-topic refused.
+    floor = 0.733
+    ceil = 0.946
+
     def __init__(self, model: str) -> None:
         self.name = f"qdrant-inference ({model})"
         self.model = model

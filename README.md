@@ -222,6 +222,16 @@ Verified 30 Oct 2026, against the live deployment.
 | Retrieval on the server-side path | recall@5 1.000, MRR 0.750 across 28 in-domain questions |
 | End to end in a browser | Sign in, ask in Marathi, create a draft, AI-improve it, download it, all on the deployed URLs |
 
+**Live deployment**
+
+| | URL |
+|---|---|
+| App | https://nyay-sutra.vercel.app |
+| API | https://nyay-sutra-api.vercel.app |
+| Repository | https://github.com/Harishisonline/nyay-sutra |
+
+**Calibration is model specific.** `intfloat/multilingual-e5-small` packs its in-domain and off-topic score ranges closer together than e5-base does: off-topic questions peak at 0.7927 and the weakest in-domain question sits at 0.8010, so the usable raw window is only `(0.7927, 0.8010]`. `QdrantInferenceE5` therefore carries its own constants (`floor = 0.733`, `ceil = 0.946`), which put the refusal boundary at 0.7969, inside that window. Reusing the e5-base constants there silently dropped 2 of 35 legitimate legal questions and saturated 11 of 35 confidence scores at 1.0. Re-check this with `python apps/api/scripts/verify_qdrant_calibration.py` whenever the embedding model or the corpus changes.
+
 **What is not done, and what each one costs you.** Gemini and Bhashini keys are missing, so a Groq rate limit surfaces as an error instead of a fallback, and Marathi and Hindi voice stay off. English voice works through Whisper. Supabase phone OTP is disabled on the project, so the deployment runs the local OTP backend: the code is generated server-side and shown on screen instead of being sent by SMS. Enabling SMS needs a provider account and Indian DLT registration, which is a separate piece of work. The DistilBERT reranker notebook is in `apps/api/ml/train_distilbert.ipynb` but the Colab training run has not happened, so ranking is embedding-similarity only. The 48 section summaries in the seed corpus are a study corpus and have not been through a legal review.
 
 ## Disclaimer

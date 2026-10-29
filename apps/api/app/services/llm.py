@@ -9,6 +9,7 @@ labelled `offline` everywhere it surfaces."""
 
 from __future__ import annotations
 
+import asyncio
 import json
 import re
 import time
@@ -21,6 +22,12 @@ import structlog
 from app.config import get_settings
 
 log = structlog.get_logger()
+
+# How many times a single provider is tried before moving to the next one, and the
+# base delay between tries. A deployment with only one provider configured needs the
+# retries, otherwise a single 5xx becomes a failed answer for the user.
+_ATTEMPTS = 3
+_BACKOFF_SECONDS = 1.5
 
 
 class LLMUnavailable(Exception):
@@ -150,28 +157,43 @@ def describe_providers() -> str:
 
 
 async def generate(system: str, user: str, *, temperature: float = 0.2, max_tokens: int = 900) -> LLMResult:
-    """Try each provider in order. Retryable failures (429, 5xx, network) move on to the next."""
+    """Try each provider in order. Retryable failures (429, 5xx, network) move on to the next.
+
+    The last provider in the list is retried in place before the app gives up, because
+    a single blip should not surface to the user as an outage. The free Groq tier
+    returns intermittent 503s under load, and a deployment with no second provider
+    would otherwise turn one of those into a failed answer.
+
+    Earlier providers are not retried: when a fallback exists, moving to it is faster
+    than waiting, and the fallback has its own rate-limit budget.
+    """
     providers = configured_providers()
     if not providers:
         raise LLMUnavailable("No LLM provider configured")
     last: ProviderError | None = None
     for i, provider in enumerate(providers):
         start = time.perf_counter()
-        try:
-            text = await provider.complete(system, user, temperature=temperature, max_tokens=max_tokens)
-        except ProviderError as exc:
-            log.warning("llm_provider_failed", provider=provider.name, status=exc.status)
-            last = exc
-            if exc.retryable:
-                continue
-            raise LLMUnavailable(str(exc)) from exc
-        return LLMResult(
-            provider=provider.name,
-            model=provider.model,
-            text=text,
-            latency_ms=int((time.perf_counter() - start) * 1000),
-            fallback_used=i > 0,
-        )
+        is_last = i == len(providers) - 1
+        attempts = _ATTEMPTS if is_last else 1
+        for attempt in range(attempts):
+            try:
+                text = await provider.complete(system, user, temperature=temperature, max_tokens=max_tokens)
+            except ProviderError as exc:
+                log.warning("llm_provider_failed", provider=provider.name, status=exc.status, attempt=attempt + 1)
+                last = exc
+                if not exc.retryable:
+                    raise LLMUnavailable(str(exc)) from exc
+                if attempt < attempts - 1:
+                    await asyncio.sleep(_BACKOFF_SECONDS * (attempt + 1))
+                    continue
+                break
+            return LLMResult(
+                provider=provider.name,
+                model=provider.model,
+                text=text,
+                latency_ms=int((time.perf_counter() - start) * 1000),
+                fallback_used=i > 0,
+            )
     raise LLMUnavailable(str(last) if last else "All providers failed")
 
 

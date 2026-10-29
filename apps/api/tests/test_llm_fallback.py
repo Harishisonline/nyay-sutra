@@ -48,9 +48,43 @@ async def test_non_retryable_error_does_not_fall_back() -> None:
 
 
 async def test_all_providers_down_raises_unavailable() -> None:
-    llm.set_providers_for_tests([FakeProvider("groq", [429]), FakeProvider("gemini", [503])])
+    # The last provider is retried in place, so it needs a failure for every attempt.
+    llm.set_providers_for_tests(
+        [FakeProvider("groq", [429]), FakeProvider("gemini", [503, 503, 503, 503])]
+    )
     with pytest.raises(llm.LLMUnavailable):
         await llm.generate("system", "user")
+
+
+async def test_only_provider_is_retried_in_place_before_failing() -> None:
+    """A single configured provider gets retried, so one blip is not a user-facing outage."""
+    groq = FakeProvider("groq", [503, 503])
+    llm.set_providers_for_tests([groq])
+
+    result = await llm.generate("system", "user")
+
+    assert result.provider == "groq"
+    assert len(groq.prompts) == 3
+
+
+async def test_only_provider_retry_gives_up_after_the_attempt_budget() -> None:
+    groq = FakeProvider("groq", [503, 503, 503, 503])
+    llm.set_providers_for_tests([groq])
+
+    with pytest.raises(llm.LLMUnavailable):
+        await llm.generate("system", "user")
+
+    assert len(groq.prompts) == llm._ATTEMPTS
+
+
+async def test_non_retryable_error_on_last_provider_is_not_retried() -> None:
+    groq = FakeProvider("groq", [400])
+    llm.set_providers_for_tests([groq])
+
+    with pytest.raises(llm.LLMUnavailable):
+        await llm.generate("system", "user")
+
+    assert len(groq.prompts) == 1
 
 
 async def test_no_providers_configured_raises_unavailable() -> None:

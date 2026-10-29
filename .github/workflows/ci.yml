@@ -21,8 +21,8 @@ jobs:
       - uses: actions/checkout@v4
 
       - uses: pnpm/action-setup@v4
-        with:
-          version: 10
+        # No version key: package.json pins "packageManager": "pnpm@9.15.9",
+        # and the action errors out if both are given.
 
       - uses: actions/setup-node@v4
         with:
@@ -66,7 +66,9 @@ jobs:
           pip install --index-url https://download.pytorch.org/whl/cpu \
               --extra-index-url https://pypi.org/simple \
               "torch==2.14.1"
-          pip install ".[dev]"
+          # The ml extra is needed because app/services/reranker.py imports
+          # transformers behind a lazy import guard, and mypy still resolves it.
+          pip install ".[dev,ml]"
 
       - name: Ruff
         run: ruff check .

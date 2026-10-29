@@ -1,0 +1,67 @@
+[project]
+name = "nyay-sutra-api"
+version = "0.4.2"
+description = "NYAY-SUTRA backend: RAG over Indian statutes, voice, drafts."
+requires-python = ">=3.12,<3.13"
+license = { text = "MIT" }
+dependencies = [
+  "fastapi>=0.115",
+  "uvicorn[standard]>=0.30",
+  "pydantic>=2.8",
+  "pydantic-settings>=2.4",
+  "sqlalchemy[asyncio]>=2.0.32",
+  "asyncpg>=0.29",
+  "aiosqlite>=0.20",
+  "httpx>=0.27",
+  "pyjwt>=2.9",
+  "qdrant-client>=1.11",
+  "structlog>=24.4",
+  "python-multipart>=0.0.9",
+  "numpy>=1.26",
+]
+
+[project.optional-dependencies]
+ml = [
+  "sentence-transformers>=3.0",
+]
+dev = [
+  "pytest>=8.3",
+  "pytest-asyncio>=0.24",
+  "ruff>=0.6",
+  "mypy>=1.11",
+]
+
+[build-system]
+requires = ["setuptools>=70"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["app*", "scripts*"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+extend-exclude = ["ml", ".venv"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "ASYNC", "S", "RUF"]
+ignore = ["S101", "S311", "RUF001", "RUF002", "RUF003", "B008"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S105", "S106"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+plugins = ["pydantic.mypy"]
+exclude = ["^ml/", "^\\.venv/", "^build/"]
+
+[[tool.mypy.overrides]]
+module = ["sentence_transformers.*", "qdrant_client.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
+addopts = "-p no:cacheprovider"

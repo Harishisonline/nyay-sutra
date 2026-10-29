@@ -1,0 +1,29 @@
+# Keep the build context small and keep secrets out of the image.
+*
+!app/
+!app/**
+!scripts/
+!scripts/**
+!data/
+!data/seed_corpus.json
+!pyproject.toml
+!Dockerfile
+!README.yaml
+
+# Never ship these even if the patterns above would allow them.
+**/.env
+**/.env.*
+**/__pycache__/
+**/*.pyc
+**/.venv/
+**/venv/
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+**/tests/
+**/ml/
+**/db/
+**/data/qdrant/
+**/data/models/
+**/*.db
+**/*.sqlite3

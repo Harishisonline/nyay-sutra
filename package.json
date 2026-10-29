@@ -1,0 +1,26 @@
+{
+  "name": "nyay-sutra",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Voice-first legal rights awareness for Maharashtra citizens.",
+  "scripts": {
+    "dev": "concurrently -n web,api -c cyan,magenta \"pnpm --filter @nyay/web dev\" \"pnpm dev:api\"",
+    "dev:web": "pnpm --filter @nyay/web dev",
+    "dev:api": "cd apps/api && .venv/bin/uvicorn app.main:app --reload --port 8000",
+    "build": "pnpm --filter @nyay/web build",
+    "start": "pnpm --filter @nyay/web start",
+    "lint": "pnpm --filter @nyay/web lint",
+    "typecheck": "pnpm --filter @nyay/web typecheck",
+    "test": "pnpm --filter @nyay/web test",
+    "check:api": "cd apps/api && .venv/bin/ruff check && .venv/bin/mypy . && .venv/bin/pytest -q",
+    "ingest:mock": "cd apps/api && .venv/bin/python -m scripts.ingest_corpus --mock"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  },
+  "engines": {
+    "node": ">=20.9.0",
+    "pnpm": ">=9.0.0"
+  },
+  "packageManager": "pnpm@9.15.9"
+}

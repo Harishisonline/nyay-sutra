@@ -1,0 +1,626 @@
+{
+  "version": "2026-10-20",
+  "note": "Section bodies are plain-language summaries written for retrieval and display. They are not the official text. Every section links to India Code for the authoritative wording.",
+  "categories": [
+    {
+      "id": "tenancy",
+      "title": "Landlord and tenant rights",
+      "summary": "Eviction, rent, essential supplies, leave and licence, registration of rent agreements.",
+      "icon": "\u2302",
+      "sample_questions": [
+        "Can my landlord cut the water supply because I refused to pay extra?",
+        "My landlord wants me out without notice. What can I do?"
+      ]
+    },
+    {
+      "id": "consumer",
+      "title": "Consumer rights",
+      "summary": "Defective goods, deficient service, unfair trade practices, filing at the District Commission.",
+      "icon": "\u2696",
+      "sample_questions": [
+        "The shop refuses to replace a defective phone under warranty.",
+        "How do I file a consumer complaint and what does it cost?"
+      ]
+    },
+    {
+      "id": "women_child",
+      "title": "Women and child",
+      "summary": "Domestic violence, dowry, cruelty, sexual harassment at work, maternity protection.",
+      "icon": "\u2640",
+      "sample_questions": [
+        "My in-laws are demanding more dowry. Is that a crime?",
+        "My manager makes sexual remarks. Where do I complain?"
+      ]
+    },
+    {
+      "id": "rti",
+      "title": "RTI and civic",
+      "summary": "Ask any public authority for information, timelines, fees, appeals, penalties.",
+      "icon": "\u2318",
+      "sample_questions": [
+        "How do I file an RTI to know the status of my ration card?",
+        "My RTI got no reply in 30 days. What next?"
+      ]
+    },
+    {
+      "id": "health",
+      "title": "Health and medical",
+      "summary": "Medical negligence and hospital overbilling as deficiency in service under consumer law.",
+      "icon": "\u271A",
+      "sample_questions": [
+        "The hospital overcharged me and will not explain the bill.",
+        "Can I file a consumer case for medical negligence?"
+      ]
+    },
+    {
+      "id": "wages",
+      "title": "Wages and labour",
+      "summary": "Maternity benefit, protection from dismissal during pregnancy, workplace harassment committees.",
+      "icon": "\u2692",
+      "sample_questions": [
+        "How many weeks of paid maternity leave am I entitled to?",
+        "Can my employer fire me because I am pregnant?"
+      ]
+    },
+    {
+      "id": "education",
+      "title": "Education",
+      "summary": "Free schooling for ages 6 to 14, 25 percent reserved seats, no capitation fee, no corporal punishment.",
+      "icon": "\u2690",
+      "sample_questions": [
+        "The private school asked for a donation for admission. Is that legal?",
+        "How do I apply for an RTE 25 percent quota seat?"
+      ]
+    },
+    {
+      "id": "criminal",
+      "title": "Criminal complaints",
+      "summary": "Filing an FIR, Zero FIR, what to do when police refuse, cheating, intimidation.",
+      "icon": "\u2691",
+      "sample_questions": [
+        "The police refused to file my FIR. What can I do?",
+        "Someone cheated me of money. Which law applies?"
+      ]
+    },
+    {
+      "id": "family",
+      "title": "Family law",
+      "summary": "Maintenance for wives, children and parents, residence in the shared household.",
+      "icon": "\u2665",
+      "sample_questions": [
+        "My husband stopped paying for our child. Can I claim maintenance?",
+        "Can I be thrown out of my matrimonial home?"
+      ]
+    },
+    {
+      "id": "cyber",
+      "title": "Cyber and online fraud",
+      "summary": "UPI and online cheating, identity theft, privacy violations, obscene content.",
+      "icon": "\u2316",
+      "sample_questions": [
+        "Someone used my photos to make a fake profile.",
+        "I lost money to a fake customer care number. What law applies?"
+      ]
+    }
+  ],
+  "acts": [
+    {
+      "id": "mh-rent-control-1999",
+      "short_name": "MRCA 1999",
+      "full_name": "Maharashtra Rent Control Act, 1999",
+      "jurisdiction": "state",
+      "state": "Maharashtra",
+      "enacted_year": 1999,
+      "repealed_year": null,
+      "official_url": "https://www.indiacode.nic.in/handle/123456789/19923",
+      "categories": ["tenancy"]
+    },
+    {
+      "id": "cpa-2019",
+      "short_name": "CPA 2019",
+      "full_name": "Consumer Protection Act, 2019",
+      "jurisdiction": "central",
+      "state": null,
+      "enacted_year": 2019,
+      "repealed_year": null,
+      "official_url": "https://www.indiacode.nic.in/handle/123456789/15256",
+      "categories": ["consumer", "health"]
+    },
+    {
+      "id": "rti-2005",
+      "short_name": "RTI Act 2005",
+      "full_name": "Right to Information Act, 2005",
+      "jurisdiction": "central",
+      "state": null,
+      "enacted_year": 2005,
+      "repealed_year": null,
+      "official_url": "https://www.indiacode.nic.in/",
+      "categories": ["rti"]
+    },
+    {
+      "id": "pwdva-2005",
+      "short_name": "DV Act 2005",
+      "full_name": "Protection of Women from Domestic Violence Act, 2005",
+      "jurisdiction": "central",
+      "state": null,
+      "enacted_year": 2005,
+      "repealed_year": null,
+      "official_url": "https://www.indiacode.nic.in/",
+      "categories": ["women_child", "family"]
+    },
+    {
+      "id": "dowry-prohibition-1961",
+      "short_name": "Dowry Prohibition Act 1961",
+      "full_name": "Dowry Prohibition Act, 1961",
+      "jurisdiction": "central",
+      "state": null,
+      "enacted_year": 1961,
+      "repealed_year": null,
+      "official_url": "https://www.indiacode.nic.in/",
+      "categories": ["women_child", "family"]
+    },
+    {
+      "id": "posh-2013",
+      "short_name": "POSH Act 2013",
+      "full_name": "Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013",
+      "jurisdiction": "central",
+      "state": null,
+      "enacted_year": 2013,
+      "repealed_year": null,
+      "official_url": "https://www.indiacode.nic.in/",
+      "categories": ["women_child", "wages"]
+    },
+    {
+      "id": "rte-2009",
+      "short_name": "RTE Act 2009",
+      "full_name": "Right of Children to Free and Compulsory Education Act, 2009",
+      "jurisdiction": "central",
+      "state": null,
+      "enacted_year": 2009,
+      "repealed_year": null,
+      "official_url": "https://www.indiacode.nic.in/",
+      "categories": ["education"]
+    },
+    {
+      "id": "maternity-benefit-1961",
+      "short_name": "Maternity Benefit Act 1961",
+      "full_name": "Maternity Benefit Act, 1961",
+      "jurisdiction": "central",
+      "state": null,
+      "enacted_year": 1961,
+      "repealed_year": null,
+      "official_url": "https://www.indiacode.nic.in/",
+      "categories": ["wages", "women_child"]
+    },
+    {
+      "id": "it-act-2000",
+      "short_name": "IT Act 2000",
+      "full_name": "Information Technology Act, 2000",
+      "jurisdiction": "central",
+      "state": null,
+      "enacted_year": 2000,
+      "repealed_year": null,
+      "official_url": "https://www.indiacode.nic.in/",
+      "categories": ["cyber"]
+    },
+    {
+      "id": "bnss-2023",
+      "short_name": "BNSS 2023",
+      "full_name": "Bharatiya Nagarik Suraksha Sanhita, 2023",
+      "jurisdiction": "central",
+      "state": null,
+      "enacted_year": 2023,
+      "repealed_year": null,
+      "official_url": "https://www.indiacode.nic.in/",
+      "categories": ["criminal", "family"]
+    },
+    {
+      "id": "crpc-1973",
+      "short_name": "CrPC 1973",
+      "full_name": "Code of Criminal Procedure, 1973",
+      "jurisdiction": "central",
+      "state": null,
+      "enacted_year": 1973,
+      "repealed_year": 2024,
+      "official_url": "https://www.indiacode.nic.in/",
+      "categories": ["criminal", "family"]
+    },
+    {
+      "id": "ipc-1860",
+      "short_name": "IPC 1860",
+      "full_name": "Indian Penal Code, 1860",
+      "jurisdiction": "central",
+      "state": null,
+      "enacted_year": 1860,
+      "repealed_year": 2024,
+      "official_url": "https://www.indiacode.nic.in/",
+      "categories": ["criminal", "women_child"]
+    }
+  ],
+  "sections": [
+    {
+      "act_id": "mh-rent-control-1999",
+      "section": "15",
+      "title": "No eviction while the tenant pays or is ready to pay the standard rent",
+      "body": "A landlord is not entitled to recover possession of premises from a tenant so long as the tenant pays, or is ready and willing to pay, the standard rent and permitted increases, and observes the other conditions of the tenancy. If rent is in arrears for ninety days or more after a written notice of demand, the landlord may file a suit for recovery of possession.",
+      "keywords": "eviction notice tenant rent arrears landlord cannot evict किरायेदार बेदखली भाडेकरू घर खाली करा मकान मालिक",
+      "categories": ["tenancy"]
+    },
+    {
+      "act_id": "mh-rent-control-1999",
+      "section": "16",
+      "title": "When a landlord may recover possession",
+      "body": "The court may pass a decree for eviction only on specified grounds, such as the tenant committing acts of waste or damage, causing nuisance, using the premises for an illegal purpose, subletting without consent, the tenant acquiring a suitable residence elsewhere, or the landlord reasonably and in good faith requiring the premises for his own occupation. Eviction must go through the court; a landlord cannot evict by force.",
+      "keywords": "eviction grounds court decree own use bona fide requirement subletting nuisance बेदखली घरमालक कोर्ट",
+      "categories": ["tenancy"]
+    },
+    {
+      "act_id": "mh-rent-control-1999",
+      "section": "24",
+      "title": "Recovery of premises given on leave and licence",
+      "body": "When premises are given on leave and licence for residence, the licensee must hand back possession on the expiry of the licence period. If the licensee does not, the licensor may apply to the Competent Authority for eviction, and the licensee becomes liable to pay damages at double the licence fee for the period of overstay. A written and registered leave and licence agreement is conclusive evidence of its terms.",
+      "keywords": "leave and licence agreement licensee licensor deposit expiry 11 months Competent Authority लिव्ह अँड लायसन्स करार डिपॉझिट",
+      "categories": ["tenancy"]
+    },
+    {
+      "act_id": "mh-rent-control-1999",
+      "section": "29",
+      "title": "Landlord must not cut off essential supplies or services",
+      "body": "No landlord, either himself or through any person acting for him, shall without just and sufficient cause cut off or withhold any essential supply or service enjoyed by the tenant, such as water, electricity, passages, staircases, lifts, lighting or sanitary services. The tenant may apply to the court, which can order the supply restored immediately, and the landlord can be punished with imprisonment and fine.",
+      "keywords": "water supply cut electricity cut lift essential service landlord harassment पाणी बंद वीज बंद पानी काट दिया बिजली मकान मालिक",
+      "categories": ["tenancy"]
+    },
+    {
+      "act_id": "mh-rent-control-1999",
+      "section": "55",
+      "title": "Rent and licence agreements must be in writing and registered",
+      "body": "Every agreement for leave and licence or for letting premises entered into after the Act came into force must be in writing and registered under the Registration Act, 1908. The responsibility for getting it registered is on the landlord. If it is not registered, the tenant's version of the terms prevails unless proved otherwise, and the landlord can be punished.",
+      "keywords": "rent agreement registration written agreement landlord responsibility security deposit terms भाडे करार नोंदणी किरायानामा",
+      "categories": ["tenancy"]
+    },
+    {
+      "act_id": "cpa-2019",
+      "section": "2(7)",
+      "title": "Who is a consumer",
+      "body": "A consumer is any person who buys goods or hires or avails of services for a consideration that has been paid, promised, or partly paid, including online and offline transactions, teleshopping, direct selling and multi-level marketing. A person who buys goods for resale or for a commercial purpose is not a consumer, but buying goods exclusively to earn a livelihood by self-employment is allowed.",
+      "keywords": "consumer definition buyer online purchase service paid ग्राहक उपभोक्ता",
+      "categories": ["consumer", "health"]
+    },
+    {
+      "act_id": "cpa-2019",
+      "section": "2(11)",
+      "title": "Deficiency in service",
+      "body": "Deficiency means any fault, imperfection, shortcoming or inadequacy in the quality, nature or manner of performance of a service that is required by law or promised by contract. It includes negligence, omission or deliberate withholding of relevant information by the service provider that causes loss or injury to the consumer. Hospitals, banks, telecom companies, builders and courier firms are service providers.",
+      "keywords": "deficiency in service hospital negligence bank telecom poor service overbilling सेवा में कमी रुग्णालय अस्पताल",
+      "categories": ["consumer", "health"]
+    },
+    {
+      "act_id": "cpa-2019",
+      "section": "2(47)",
+      "title": "Unfair trade practice",
+      "body": "An unfair trade practice is any unfair or deceptive method used to promote the sale or supply of goods or services, such as false claims about quality, misleading advertisements, false offers of bargain prices, refusal to take back defective goods or refund within the stated period, and failing to issue a bill or cash memo.",
+      "keywords": "unfair trade practice misleading advertisement no bill refund refused warranty फसवणूक धोखा बिल",
+      "categories": ["consumer"]
+    },
+    {
+      "act_id": "cpa-2019",
+      "section": "34",
+      "title": "Jurisdiction of the District Commission",
+      "body": "The District Consumer Disputes Redressal Commission hears complaints where the value of goods or services paid as consideration is within its pecuniary limit, which is up to fifty lakh rupees under the 2021 jurisdiction rules. A complaint can be filed where the opposite party lives or works, or where the complainant lives or works, or where the cause of action arose.",
+      "keywords": "district commission consumer court jurisdiction where to file value limit ग्राहक न्यायालय जिल्हा आयोग",
+      "categories": ["consumer", "health"]
+    },
+    {
+      "act_id": "cpa-2019",
+      "section": "35",
+      "title": "How to file a consumer complaint",
+      "body": "A complaint about goods sold or services provided can be filed with the District Commission by the consumer, a recognised consumer association, or the Central or State Government. It can be filed electronically through the e-Daakhil portal. The consumer does not need a lawyer and can appear in person.",
+      "keywords": "file consumer complaint e-daakhil without lawyer how to complain तक्रार दाखल शिकायत कैसे करें",
+      "categories": ["consumer", "health"]
+    },
+    {
+      "act_id": "cpa-2019",
+      "section": "69",
+      "title": "Limitation period for consumer complaints",
+      "body": "The District, State or National Commission shall not admit a complaint unless it is filed within two years from the date on which the cause of action arose. A complaint filed later can be admitted only if the complainant satisfies the Commission that there was sufficient cause for the delay, and the Commission records its reasons.",
+      "keywords": "time limit two years limitation delay consumer complaint मुदत दो साल",
+      "categories": ["consumer", "health"]
+    },
+    {
+      "act_id": "rti-2005",
+      "section": "3",
+      "title": "Right to information",
+      "body": "Subject to the provisions of the Act, all citizens have the right to information held by or under the control of any public authority. This covers records, documents, emails, opinions, file notings, contracts, reports and data held in electronic form.",
+      "keywords": "right to information citizen public authority government office records माहितीचा अधिकार सूचना का अधिकार",
+      "categories": ["rti"]
+    },
+    {
+      "act_id": "rti-2005",
+      "section": "6",
+      "title": "How to request information",
+      "body": "A person who wants information makes a request in writing or electronically, in English, Hindi or the official language of the area, to the Public Information Officer of the public authority, along with the prescribed fee. The applicant does not have to give any reason for asking or any personal details except those needed to contact them.",
+      "keywords": "RTI application how to file fee public information officer PIO no reason माहिती अर्ज आरटीआई आवेदन",
+      "categories": ["rti"]
+    },
+    {
+      "act_id": "rti-2005",
+      "section": "7",
+      "title": "Time limit for a reply",
+      "body": "The Public Information Officer must provide the information or reject the request with reasons within thirty days of receiving it. If the information concerns the life or liberty of a person, it must be provided within forty-eight hours. Applicants below the poverty line pay no fee. If the officer fails to decide within the time limit, the request is deemed to have been refused.",
+      "keywords": "30 days reply deadline no response deemed refusal BPL free 48 hours life liberty ३० दिवस उत्तर नहीं मिला",
+      "categories": ["rti"]
+    },
+    {
+      "act_id": "rti-2005",
+      "section": "8",
+      "title": "Information exempt from disclosure",
+      "body": "Certain information need not be disclosed, such as information that would harm the sovereignty, security or economic interests of the country, information forbidden by a court, cabinet papers before a decision, and personal information with no relation to public activity or interest. Information that cannot be denied to Parliament or a State Legislature cannot be denied to a citizen.",
+      "keywords": "exemption refused personal information third party national security नाकारले",
+      "categories": ["rti"]
+    },
+    {
+      "act_id": "rti-2005",
+      "section": "19",
+      "title": "First and second appeal",
+      "body": "If you get no decision within the time limit, or are unhappy with the reply, you can file a first appeal within thirty days to an officer senior in rank to the Public Information Officer in the same authority. Against the first appellate decision, a second appeal lies to the State or Central Information Commission within ninety days.",
+      "keywords": "first appeal second appeal information commission 30 days 90 days प्रथम अपील अपील",
+      "categories": ["rti"]
+    },
+    {
+      "act_id": "rti-2005",
+      "section": "20",
+      "title": "Penalty on the information officer",
+      "body": "If the Information Commission finds that the officer refused an application without reasonable cause, did not reply within time, gave false or misleading information, or destroyed information, it can impose a penalty of two hundred and fifty rupees for each day of delay, up to a total of twenty-five thousand rupees, and recommend disciplinary action.",
+      "keywords": "penalty PIO 250 per day 25000 fine delay दंड जुर्माना",
+      "categories": ["rti"]
+    },
+    {
+      "act_id": "pwdva-2005",
+      "section": "3",
+      "title": "What counts as domestic violence",
+      "body": "Domestic violence includes any act or conduct that harms or endangers the health, safety, life or wellbeing of the woman, whether physical, sexual, verbal, emotional or economic abuse. It includes harassing her or her relatives to meet an unlawful demand for dowry or property, threats, insults, name-calling, and depriving her of money or resources she is entitled to.",
+      "keywords": "domestic violence definition physical verbal emotional economic abuse husband in-laws घरगुती हिंसा घरेलू हिंसा मारहाण",
+      "categories": ["women_child", "family"]
+    },
+    {
+      "act_id": "pwdva-2005",
+      "section": "12",
+      "title": "Application to the Magistrate",
+      "body": "An aggrieved woman, a Protection Officer, or any other person on her behalf can apply to the Magistrate for one or more reliefs under the Act, including protection, residence, monetary, custody and compensation orders. The Magistrate should fix the first hearing within three days and try to dispose of the application within sixty days.",
+      "keywords": "complaint magistrate protection officer apply relief domestic violence case तक्रार दंडाधिकारी",
+      "categories": ["women_child", "family"]
+    },
+    {
+      "act_id": "pwdva-2005",
+      "section": "17",
+      "title": "Right to reside in the shared household",
+      "body": "Every woman in a domestic relationship has the right to reside in the shared household, whether or not she has any right, title or beneficial interest in it. She cannot be evicted or excluded from the shared household or any part of it by the respondent except in accordance with the procedure established by law.",
+      "keywords": "thrown out of house matrimonial home shared household right to live सासर घर से निकाल दिया",
+      "categories": ["women_child", "family"]
+    },
+    {
+      "act_id": "pwdva-2005",
+      "section": "18",
+      "title": "Protection orders",
+      "body": "The Magistrate can pass a protection order prohibiting the respondent from committing any act of domestic violence, entering her workplace or school, attempting to communicate with her, alienating assets or operating joint bank accounts, and causing violence to her dependants or relatives.",
+      "keywords": "protection order stop violence restraining order संरक्षण आदेश",
+      "categories": ["women_child", "family"]
+    },
+    {
+      "act_id": "pwdva-2005",
+      "section": "20",
+      "title": "Monetary relief",
+      "body": "The Magistrate can direct the respondent to pay monetary relief to meet expenses and losses suffered as a result of domestic violence, including loss of earnings, medical expenses, loss caused by destruction or removal of property, and maintenance for the woman and her children. The relief must be adequate, fair and reasonable and consistent with her standard of living.",
+      "keywords": "money maintenance expenses medical costs monetary relief आर्थिक मदत खर्चा",
+      "categories": ["women_child", "family"]
+    },
+    {
+      "act_id": "dowry-prohibition-1961",
+      "section": "2",
+      "title": "Definition of dowry",
+      "body": "Dowry means any property or valuable security given or agreed to be given, directly or indirectly, by one party to a marriage to the other, or by the parents or any other person, at or before or any time after the marriage, in connection with the marriage. Mahr under Muslim personal law is excluded.",
+      "keywords": "dowry definition gifts marriage hunda हुंडा दहेज",
+      "categories": ["women_child", "family"]
+    },
+    {
+      "act_id": "dowry-prohibition-1961",
+      "section": "3",
+      "title": "Penalty for giving or taking dowry",
+      "body": "Anyone who gives, takes, or abets the giving or taking of dowry can be punished with imprisonment of not less than five years and a fine of not less than fifteen thousand rupees or the value of the dowry, whichever is more. Presents given at the time of marriage without demand and entered in a list are not dowry.",
+      "keywords": "dowry punishment five years taking dowry crime हुंडा घेणे गुन्हा दहेज लेना अपराध",
+      "categories": ["women_child", "family"]
+    },
+    {
+      "act_id": "dowry-prohibition-1961",
+      "section": "4",
+      "title": "Penalty for demanding dowry",
+      "body": "Anyone who directly or indirectly demands dowry from the parents, relatives or guardian of a bride or bridegroom can be punished with imprisonment of not less than six months and up to two years, and a fine of up to ten thousand rupees.",
+      "keywords": "dowry demand in-laws asking money after marriage हुंडा मागणी दहेज की मांग ससुराल",
+      "categories": ["women_child", "family"]
+    },
+    {
+      "act_id": "posh-2013",
+      "section": "2(n)",
+      "title": "What counts as sexual harassment",
+      "body": "Sexual harassment includes unwelcome physical contact and advances, a demand or request for sexual favours, sexually coloured remarks, showing pornography, and any other unwelcome physical, verbal or non-verbal conduct of a sexual nature, whether directly or by implication.",
+      "keywords": "sexual harassment workplace remarks touching boss manager लैंगिक छळ यौन उत्पीड़न ऑफिस",
+      "categories": ["women_child", "wages"]
+    },
+    {
+      "act_id": "posh-2013",
+      "section": "4",
+      "title": "Internal Committee at every workplace",
+      "body": "Every employer of a workplace with ten or more employees must constitute an Internal Committee by written order. It is headed by a senior woman employee, has at least two employees committed to the cause of women, and one external member from an NGO or association familiar with sexual harassment issues. At least half the members must be women.",
+      "keywords": "internal committee ICC employer 10 employees complaint committee अंतर्गत समिति",
+      "categories": ["women_child", "wages"]
+    },
+    {
+      "act_id": "posh-2013",
+      "section": "9",
+      "title": "Filing a complaint",
+      "body": "An aggrieved woman can make a written complaint of sexual harassment to the Internal Committee, or to the Local Committee if the workplace has none, within three months of the incident, or of the last incident in a series. The committee can extend the time by another three months if circumstances prevented her from filing earlier.",
+      "keywords": "how to complain sexual harassment three months local committee तक्रार कशी करावी",
+      "categories": ["women_child", "wages"]
+    },
+    {
+      "act_id": "posh-2013",
+      "section": "11",
+      "title": "Inquiry into the complaint",
+      "body": "The Internal or Local Committee inquires into the complaint in accordance with the service rules applicable to the respondent and must complete the inquiry within ninety days. Both parties get a hearing. During the inquiry the woman can ask for interim relief such as a transfer or leave.",
+      "keywords": "inquiry 90 days hearing interim relief transfer चौकशी जांच",
+      "categories": ["women_child", "wages"]
+    },
+    {
+      "act_id": "rte-2009",
+      "section": "3",
+      "title": "Free and compulsory education for ages 6 to 14",
+      "body": "Every child between six and fourteen years has the right to free and compulsory education in a neighbourhood school until completion of elementary education. No child is liable to pay any fee, charge or expense that may prevent them from pursuing and completing elementary education.",
+      "keywords": "free education child 6 to 14 school fees शिक्षण हक्क मुफ्त शिक्षा",
+      "categories": ["education"]
+    },
+    {
+      "act_id": "rte-2009",
+      "section": "12",
+      "title": "Twenty-five percent seats for weaker sections",
+      "body": "Private unaided schools must admit, in class one or pre-school, at least twenty-five percent of the strength of that class from children of weaker sections and disadvantaged groups in the neighbourhood, and provide them free education until elementary education is complete. The state reimburses the school. In Maharashtra, admission is through the online RTE 25 percent lottery.",
+      "keywords": "RTE 25 percent quota admission private school lottery weaker section आरटीई प्रवेश २५ टक्के",
+      "categories": ["education"]
+    },
+    {
+      "act_id": "rte-2009",
+      "section": "13",
+      "title": "No capitation fee and no screening",
+      "body": "No school or person may collect any capitation fee or subject a child or parents to any screening procedure while admitting a child. A school that collects capitation fee can be fined up to ten times the fee collected. Screening a child is punishable with a fine of twenty-five thousand rupees for the first contravention and fifty thousand rupees for each later one.",
+      "keywords": "donation capitation fee interview screening admission illegal देणगी डोनेशन",
+      "categories": ["education"]
+    },
+    {
+      "act_id": "rte-2009",
+      "section": "17",
+      "title": "No physical punishment or mental harassment",
+      "body": "No child shall be subjected to physical punishment or mental harassment in school. Whoever does so is liable to disciplinary action under the service rules applicable to them.",
+      "keywords": "teacher beating corporal punishment harassment school शिक्षा मारहाण",
+      "categories": ["education"]
+    },
+    {
+      "act_id": "maternity-benefit-1961",
+      "section": "5",
+      "title": "Right to paid maternity leave",
+      "body": "Every woman is entitled to maternity benefit at the rate of her average daily wage for the period of her actual absence. The maximum period is twenty-six weeks, of which not more than eight weeks may precede the expected delivery. For a woman with two or more surviving children, the maximum is twelve weeks. To be eligible she must have worked for the employer for at least eighty days in the twelve months before the expected delivery.",
+      "keywords": "maternity leave 26 weeks paid leave pregnancy salary प्रसूती रजा मातृत्व अवकाश",
+      "categories": ["wages", "women_child"]
+    },
+    {
+      "act_id": "maternity-benefit-1961",
+      "section": "11A",
+      "title": "Creche facility",
+      "body": "Every establishment with fifty or more employees must provide a creche within a prescribed distance, and the employer must allow the woman four visits a day to the creche, including her interval for rest.",
+      "keywords": "creche childcare office 50 employees पाळणाघर",
+      "categories": ["wages", "women_child"]
+    },
+    {
+      "act_id": "maternity-benefit-1961",
+      "section": "12",
+      "title": "No dismissal during pregnancy or maternity leave",
+      "body": "When a woman is absent from work in accordance with the Act, it is unlawful for the employer to discharge or dismiss her during or on account of such absence, or to change her conditions of service to her disadvantage. A woman dismissed during pregnancy remains entitled to the maternity benefit unless dismissed for gross misconduct.",
+      "keywords": "fired for pregnancy dismissal unlawful termination pregnant नोकरीवरून काढले गर्भवती",
+      "categories": ["wages", "women_child"]
+    },
+    {
+      "act_id": "it-act-2000",
+      "section": "43",
+      "title": "Compensation for damage to a computer or data",
+      "body": "Anyone who accesses a computer system without permission, downloads or copies data, introduces a virus, damages or disrupts a system, or helps another person do so, is liable to pay damages by way of compensation to the person affected. Claims up to five crore rupees are decided by the State Adjudicating Officer.",
+      "keywords": "hacking unauthorised access data theft compensation हॅकिंग",
+      "categories": ["cyber"]
+    },
+    {
+      "act_id": "it-act-2000",
+      "section": "66C",
+      "title": "Identity theft",
+      "body": "Whoever fraudulently or dishonestly uses another person's electronic signature, password or any other unique identification feature can be punished with imprisonment of up to three years and a fine of up to one lakh rupees.",
+      "keywords": "identity theft password misuse OTP fake profile account hacked ओळख चोरी पहचान की चोरी",
+      "categories": ["cyber"]
+    },
+    {
+      "act_id": "it-act-2000",
+      "section": "66D",
+      "title": "Cheating by impersonation online",
+      "body": "Whoever cheats by pretending to be someone else using a computer resource or a communication device can be punished with imprisonment of up to three years and a fine of up to one lakh rupees. This covers fake customer care numbers, fake bank calls, and UPI fraud where the fraudster poses as another person.",
+      "keywords": "online fraud UPI scam fake customer care impersonation cheated money ऑनलाइन फसवणूक धोखाधड़ी",
+      "categories": ["cyber", "criminal"]
+    },
+    {
+      "act_id": "it-act-2000",
+      "section": "66E",
+      "title": "Violation of privacy",
+      "body": "Whoever intentionally captures, publishes or transmits the image of a private area of any person without their consent, violating their privacy, can be punished with imprisonment of up to three years or a fine of up to two lakh rupees, or both.",
+      "keywords": "private photos leaked privacy video without consent फोटो व्हायरल",
+      "categories": ["cyber", "women_child"]
+    },
+    {
+      "act_id": "bnss-2023",
+      "section": "173",
+      "title": "Filing an FIR, including Zero FIR and e-FIR",
+      "body": "Information about a cognizable offence can be given to an officer in charge of a police station orally or electronically, irrespective of the area where the offence was committed. The information must be written down, read over to the informant, and signed. A copy must be given free of cost. If the officer refuses to record it, the informant can send the substance in writing to the Superintendent of Police.",
+      "keywords": "FIR police refused zero FIR e-FIR complaint police station तक्रार पोलीस एफआईआर दर्ज नहीं",
+      "categories": ["criminal"]
+    },
+    {
+      "act_id": "bnss-2023",
+      "section": "175",
+      "title": "Police power to investigate and Magistrate's order",
+      "body": "An officer in charge of a police station may investigate any cognizable case without the order of a Magistrate. If the police do not act, a Magistrate empowered under the Sanhita can, on an application supported by an affidavit, order an investigation after considering the application and any report of the police officer.",
+      "keywords": "police not investigating magistrate order investigation application affidavit तपास",
+      "categories": ["criminal"]
+    },
+    {
+      "act_id": "bnss-2023",
+      "section": "144",
+      "title": "Maintenance for wives, children and parents",
+      "body": "If a person with sufficient means neglects or refuses to maintain his wife who cannot maintain herself, his minor children, his adult children with a physical or mental disability, or his father or mother who cannot maintain themselves, a Magistrate of the first class can order him to pay a monthly allowance. Interim maintenance can be ordered while the case is pending.",
+      "keywords": "maintenance wife child parents monthly allowance husband not paying पोटगी गुजारा भत्ता",
+      "categories": ["family", "women_child"]
+    },
+    {
+      "act_id": "crpc-1973",
+      "section": "154",
+      "title": "Information in cognizable cases (FIR), before 1 July 2024",
+      "body": "For offences committed before 1 July 2024, the earlier Code applies. Information relating to a cognizable offence given to the officer in charge of a police station must be reduced to writing, read over and signed, and a copy given free to the informant. If the officer refuses, the informant may send it to the Superintendent of Police.",
+      "keywords": "FIR old law CrPC 154 police refused complaint before 2024",
+      "categories": ["criminal"]
+    },
+    {
+      "act_id": "crpc-1973",
+      "section": "125",
+      "title": "Maintenance of wives, children and parents, before 1 July 2024",
+      "body": "Under the earlier Code, a Magistrate could order a person with sufficient means who neglects or refuses to maintain his wife, children or parents to pay a monthly allowance. Proceedings started before 1 July 2024 continue under this section; new applications are filed under section 144 of the BNSS.",
+      "keywords": "maintenance CrPC 125 pending case wife child पोटगी",
+      "categories": ["family"]
+    },
+    {
+      "act_id": "ipc-1860",
+      "section": "498A",
+      "title": "Cruelty by husband or his relatives, before 1 July 2024",
+      "body": "For offences committed before 1 July 2024, a husband or his relative who subjects a woman to cruelty can be punished with imprisonment of up to three years and a fine. Cruelty means wilful conduct likely to drive her to suicide or cause grave injury, or harassment to coerce her or her relatives to meet an unlawful demand for property or dowry. The same offence is now section 85 of the Bharatiya Nyaya Sanhita, 2023.",
+      "keywords": "cruelty husband in-laws harassment dowry 498A छळ क्रूरता ससुराल",
+      "categories": ["women_child", "criminal", "family"]
+    },
+    {
+      "act_id": "ipc-1860",
+      "section": "420",
+      "title": "Cheating, before 1 July 2024",
+      "body": "For offences committed before 1 July 2024, whoever cheats and thereby dishonestly induces the person deceived to deliver any property, or to make or destroy a valuable security, can be punished with imprisonment of up to seven years and a fine. The same offence is now section 318 of the Bharatiya Nyaya Sanhita, 2023.",
+      "keywords": "cheating fraud 420 money taken dishonestly फसवणूक धोखा",
+      "categories": ["criminal"]
+    },
+    {
+      "act_id": "ipc-1860",
+      "section": "506",
+      "title": "Criminal intimidation, before 1 July 2024",
+      "body": "For offences committed before 1 July 2024, whoever threatens another with injury to their person, reputation or property, intending to cause alarm or to make them do something they are not legally bound to do, can be punished with imprisonment of up to two years, or fine, or both. Threats to cause death or grievous hurt carry up to seven years.",
+      "keywords": "threat intimidation threatened to kill धमकी",
+      "categories": ["criminal"]
+    }
+  ]
+}

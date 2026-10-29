@@ -1,0 +1,75 @@
+.voiceSelect {
+  display: block;
+  margin-top: 10px;
+  max-width: 280px;
+}
+
+.preview {
+  margin-top: 16px;
+  padding: 16px;
+  background: var(--bg-subtle);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.playBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: var(--saffron-400);
+  color: #fff;
+  border: none;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.playBtn:hover {
+  background: var(--saffron-500);
+}
+
+.previewBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.previewLabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+.previewText {
+  font-size: 13px;
+  color: var(--text-primary);
+}
+
+.previewError {
+  font-size: 12px;
+  color: var(--danger);
+  margin-top: 6px;
+}
+
+.previewMeta {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .preview {
+    flex-wrap: wrap;
+  }
+
+  .previewMeta {
+    margin-left: 54px;
+  }
+}

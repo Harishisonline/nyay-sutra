@@ -1,0 +1,377 @@
+.shell {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.brandPanel {
+  flex: 0 0 50%;
+  background: var(--deep-bg);
+  color: var(--ink-50);
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.formPanel {
+  flex: 0 0 50%;
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--bg-page);
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.orb1 {
+  top: -120px;
+  right: -120px;
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(224, 138, 31, 0.22) 0%, transparent 70%);
+}
+
+.orb2 {
+  bottom: -120px;
+  left: -100px;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(245, 168, 61, 0.12) 0%, transparent 70%);
+}
+
+.brandContent {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.brandTop {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.brandQuote {
+  max-width: 480px;
+  margin: auto 0;
+  padding: 48px 0;
+}
+
+.brandQuote h2 {
+  color: var(--ink-50);
+  font-size: 2.2rem;
+  letter-spacing: -0.025em;
+  margin-bottom: 20px;
+}
+
+.brandQuote h2 em {
+  font-style: italic;
+  color: var(--saffron-300);
+}
+
+.brandQuote p {
+  color: var(--deep-muted);
+  font-size: 16px;
+  margin-bottom: 28px;
+}
+
+.brandStats {
+  display: flex;
+  gap: 32px;
+}
+
+.statValue {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--saffron-300);
+  margin-bottom: 4px;
+}
+
+.statLabel {
+  font-size: 11px;
+  color: rgba(244, 240, 230, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.brandFoot {
+  font-size: 12px;
+  color: rgba(244, 240, 230, 0.5);
+}
+
+.formWrap {
+  max-width: 420px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.formTop {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+}
+
+.formEyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+}
+
+.h1 {
+  font-size: 1.7rem;
+  letter-spacing: -0.025em;
+  margin-bottom: 12px;
+}
+
+.lede {
+  margin-bottom: 28px;
+}
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-subtle);
+  border-radius: var(--radius-pill);
+  padding: 4px;
+  margin-bottom: 24px;
+}
+
+.tab {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 10px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.tabActive {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-md);
+}
+
+.field {
+  margin-bottom: 16px;
+}
+
+.fieldLabel {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.inputRow {
+  display: flex;
+  align-items: stretch;
+  border: 1.5px solid var(--border-default);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--bg-surface);
+  transition: border-color var(--duration-fast);
+}
+
+.inputRow:focus-within {
+  border-color: var(--accent);
+}
+
+.countryCode {
+  padding: 14px 16px;
+  background: var(--bg-subtle);
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary);
+  border-right: 1px solid var(--border-default);
+  flex-shrink: 0;
+}
+
+.inputRow input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 14px 16px;
+  background: transparent;
+  font-size: 15px;
+  color: var(--text-primary);
+  min-width: 0;
+}
+
+.inputRow input:focus-visible {
+  outline: none;
+}
+
+.inputHelp {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+.otpGrid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.otpCell {
+  aspect-ratio: 1;
+  border: 1.5px solid var(--border-default);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color var(--duration-fast);
+  min-width: 0;
+  width: 100%;
+}
+
+.otpCell:focus {
+  border-color: var(--accent);
+}
+
+.resend {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.devCode {
+  font-size: 12px;
+  color: var(--text-secondary);
+  background: var(--accent-subtle);
+  border: 1px dashed var(--border-saffron);
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+  margin-top: 8px;
+}
+
+.devCode b {
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+  letter-spacing: 0.1em;
+}
+
+.submit {
+  width: 100%;
+  padding: 14px 22px;
+  font-size: 15px;
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+
+.btnLink {
+  background: none;
+  border: none;
+  color: var(--text-link);
+  font-weight: 500;
+  font-size: 14px;
+  padding: 0;
+}
+
+.btnLink:disabled {
+  color: var(--text-muted);
+}
+
+.error {
+  font-size: 13px;
+  color: var(--danger);
+  margin: 4px 0 8px;
+}
+
+.emailNote {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  margin-bottom: 8px;
+}
+
+.emailNote strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.emailNote p {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-muted);
+  font-size: 12px;
+  margin: 24px 0;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border-default);
+}
+
+.switchMode {
+  text-align: center;
+  font-size: 14px;
+}
+
+.legal {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 20px;
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .shell {
+    flex-direction: column;
+  }
+  .brandPanel {
+    flex: 0 0 auto;
+    padding: 28px;
+  }
+  .brandQuote {
+    padding: 24px 0 16px;
+  }
+  .brandQuote h2 {
+    font-size: 1.7rem;
+  }
+  .formPanel {
+    flex: 1 1 auto;
+    padding: 28px 20px 40px;
+  }
+}

@@ -1,0 +1,175 @@
+/**
+ * Three-layer design token system: primitive -> semantic -> component.
+ * Light and dark themes only. No system option (per user rule).
+ * Color palette inspired by saffron + deep ink, intentionally avoiding
+ * the generic SaaS blue/violet gradient trap.
+ */
+
+:root {
+  /* Primitive: raw values */
+  --ink-0: #fdfbf7;
+  --ink-50: #f4f0e6;
+  --ink-100: #e8e2d2;
+  --ink-200: #c9c1ad;
+  --ink-300: #9a9079;
+  --ink-400: #6c6553;
+  --ink-500: #4a4434;
+  --ink-600: #2d2a1f;
+  --ink-700: #1a1812;
+  --ink-800: #100f0a;
+  --ink-900: #0a0905;
+
+  --saffron-50: #fff4e0;
+  --saffron-100: #ffe1ad;
+  --saffron-200: #ffc773;
+  --saffron-300: #f5a83d;
+  --saffron-400: #e08a1f;
+  --saffron-500: #b86a0e;
+  --saffron-600: #8e4f08;
+
+  --success-500: #2f7d4f;
+  --success-100: #d4ecd9;
+  --warning-500: #b8801a;
+  --warning-100: #f5e4b8;
+  --danger-500: #a83232;
+  --danger-100: #f5d2d2;
+  --info-500: #2a5e8e;
+  --info-100: #d2e3f5;
+
+  /* Semantic (light theme) */
+  --bg-page: var(--ink-0);
+  --bg-surface: #ffffff;
+  --bg-elevated: #ffffff;
+  --bg-subtle: var(--ink-50);
+  --bg-overlay: rgba(10, 9, 5, 0.5);
+  --bg-code: var(--ink-50);
+
+  --text-primary: var(--ink-700);
+  --text-secondary: var(--ink-500);
+  --text-muted: var(--ink-400);
+  --text-on-accent: #ffffff;
+  --text-link: var(--saffron-500);
+
+  --border-default: var(--ink-100);
+  --border-strong: var(--ink-200);
+  --border-accent: var(--saffron-400);
+
+  --accent: var(--saffron-400);
+  --accent-hover: var(--saffron-500);
+  --accent-subtle: var(--saffron-50);
+
+  --success: var(--success-500);
+  --warning: var(--warning-500);
+  --danger: var(--danger-500);
+  --info: var(--info-500);
+
+  /* Type scale (fluid via clamp) */
+  --text-xs: clamp(0.75rem, 0.7rem + 0.2vw, 0.85rem);
+  --text-sm: clamp(0.875rem, 0.82rem + 0.25vw, 0.95rem);
+  --text-base: clamp(1rem, 0.94rem + 0.3vw, 1.1rem);
+  --text-lg: clamp(1.125rem, 1.04rem + 0.4vw, 1.25rem);
+  --text-xl: clamp(1.25rem, 1.13rem + 0.6vw, 1.45rem);
+  --text-2xl: clamp(1.5rem, 1.32rem + 0.9vw, 1.85rem);
+  --text-3xl: clamp(1.85rem, 1.58rem + 1.35vw, 2.4rem);
+  --text-4xl: clamp(2.25rem, 1.85rem + 2vw, 3.1rem);
+  --text-5xl: clamp(2.85rem, 2.25rem + 3vw, 4rem);
+
+  /* Spacing (4pt scale) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 2.5rem;
+  --space-8: 3rem;
+  --space-10: 4rem;
+  --space-12: 5rem;
+  --space-16: 7rem;
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --radius-pill: 999px;
+
+  /* Shadows (subtle, not the SaaS card-grid harsh drop) */
+  --shadow-sm: 0 1px 2px rgba(10, 9, 5, 0.04), 0 1px 1px rgba(10, 9, 5, 0.03);
+  --shadow-md: 0 4px 14px rgba(10, 9, 5, 0.06), 0 1px 3px rgba(10, 9, 5, 0.04);
+  --shadow-lg: 0 16px 40px rgba(10, 9, 5, 0.08), 0 4px 12px rgba(10, 9, 5, 0.05);
+  --shadow-glow: 0 0 0 1px var(--saffron-100), 0 12px 32px rgba(224, 138, 31, 0.18);
+
+  /* Motion (standard tier) */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 180ms;
+  --duration-base: 320ms;
+  --duration-slow: 600ms;
+
+  /* Layout */
+  --container-max: 1200px;
+  --nav-height: 64px;
+  --nav-bg: rgba(253, 251, 247, 0.88);
+
+  /* Fonts */
+  --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), "SF Mono", Menlo, Consolas, monospace;
+
+  /* Fixed brand surfaces that stay dark in both themes */
+  --deep-bg: var(--ink-800);
+  --deep-text: var(--ink-50);
+  --deep-muted: rgba(244, 240, 230, 0.7);
+  --border-saffron: var(--saffron-100);
+  --danger-border: #f5d2d2;
+}
+
+[data-theme="dark"] {
+  --bg-page: var(--ink-900);
+  --bg-surface: var(--ink-800);
+  --bg-elevated: var(--ink-700);
+  --bg-subtle: var(--ink-700);
+  --bg-overlay: rgba(0, 0, 0, 0.65);
+  --bg-code: var(--ink-700);
+
+  --text-primary: var(--ink-50);
+  --text-secondary: var(--ink-200);
+  --text-muted: var(--ink-300);
+  --text-on-accent: var(--ink-900);
+  --text-link: var(--saffron-300);
+
+  --border-default: var(--ink-700);
+  --border-strong: var(--ink-600);
+  --border-accent: var(--saffron-300);
+
+  --accent: var(--saffron-300);
+  --accent-hover: var(--saffron-200);
+  --accent-subtle: rgba(224, 138, 31, 0.12);
+  --border-saffron: rgba(245, 168, 61, 0.35);
+  --danger-border: rgba(214, 92, 92, 0.4);
+  --danger: #e27d7d;
+  --success: #6cc18f;
+  --nav-bg: rgba(10, 9, 5, 0.85);
+  --deep-bg: #15130d;
+
+  --success-100: rgba(47, 125, 79, 0.18);
+  --warning-100: rgba(184, 128, 26, 0.18);
+  --danger-100: rgba(168, 50, 50, 0.2);
+  --info-100: rgba(42, 94, 142, 0.2);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 6px 18px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 18px 50px rgba(0, 0, 0, 0.55), 0 6px 16px rgba(0, 0, 0, 0.35);
+  --shadow-glow: 0 0 0 1px rgba(224, 138, 31, 0.4), 0 12px 32px rgba(245, 168, 61, 0.18);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,80 @@
+# dependencies
+node_modules/
+.pnp/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.venv/
+venv/
+
+# next.js
+.next/
+out/
+next-env.d.ts
+
+# env
+.env
+.env.local
+.env*.local
+apps/api/.env
+apps/web/.env.local
+
+# logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# build artifacts
+dist/
+build/
+*.tsbuildinfo
+apps/api/dist/
+
+# testing
+coverage/
+.nyc_output/
+
+# secrets
+*.pem
+*.key
+secrets/
+
+# os
+Thumbs.db
+
+# data
+apps/api/data/*.parquet
+apps/api/data/*.pkl
+apps/api/data/*.db
+apps/api/data/qdrant/
+apps/api/data/models/
+*.h5
+*.onnx
+
+# hf
+.huggingface/
+
+# pnpm local content-addressable store
+.pnpm-store/
+
+# Documentation: only README.md is published. Everything else is a local
+# working file, not part of the shipped source.
+*.md
+!README.md
+
+# Local agent working files
+.build-state.md
+
+# Design mockups (local reference, not the running app)
+uimock/

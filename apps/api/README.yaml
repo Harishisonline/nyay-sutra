@@ -1,0 +1,12 @@
+---
+title: NYAY-SUTRA API
+emoji: ⚖️
+colorFrom: indigo
+colorTo: blue
+sdk: docker
+pinned: false
+app_port: 8000
+license: mit
+short_description: Voice-first legal rights assistant API for Maharashtra, RAG over Indian statutes
+startup_duration_timeout: 300
+---

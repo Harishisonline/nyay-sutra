@@ -15,6 +15,6 @@ from pathlib import Path
 # The app package is a sibling of this file's parent directory.
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from app.main import app  # noqa: E402
+from app.main import app
 
 __all__ = ["app"]
